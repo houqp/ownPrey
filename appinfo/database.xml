@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database>
+	 <name>*dbname*</name>
+	 <create>true</create>
+	 <overwrite>false</overwrite>
+	 <charset>utf8</charset>
+	 <table>
+		<name>*dbprefix*ownprey_device</name>
+		<declaration>
+			<field>
+				<name>id</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>24</length>
+			</field>
+			<field>
+				<name>name</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>100</length>
+			</field>
+			<field>
+				<name>missing</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>10</length>
+			</field>
+			<field>
+				<name>delay</name>
+				<type>integer</type>
+				<default>20</default>
+				<length>10</length>
+			</field>
+			<field>
+				<name>module_list</name>
+				<type>text</type>
+				<length>100</length>
+			</field>
+		</declaration>
+	</table>
+</database>

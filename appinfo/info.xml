@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>ownprey</id>
+	<name>ownPrey</name>
+	<description>prey server plugin for ownCloud</description>
+	<version>0.1</version>
+	<licence>AGPL</licence>
+	<author>Qingping Hou</author>
+	<require>4</require>
+</info>
