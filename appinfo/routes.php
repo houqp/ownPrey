@@ -32,25 +32,47 @@ use OCA\ownPrey\Db\DeviceMapper;
  * Normal Routes
  */
 $this->create('ownprey_index', '/')->action(
-	function($params){
+	function($params) {
 		App::main('DeviceController', 'index',
 			$params, new DIContainer());
 	}
 );
 
 $this->create('ownprey_device_check', '/check/{id}')->action(
-	function($params){
+	function($params) {
 		App::main('DeviceController', 'check',
 			$params, new DIContainer());
 	}
 );
 
+
 /**
  * Ajax Routes
  */
+$this->create('ownprey_device_get_all', '/device')->get()->action(
+	function($params) {
+		App::main('DeviceController', 'findAll',
+			$params, new DIContainer());
+	}
+);
+
 $this->create('ownprey_device_add', '/device')->post()->action(
-	function($params){
+	function($params) {
 		App::main('DeviceController', 'addDevice',
+			$params, new DIContainer());
+	}
+);
+
+$this->create('ownprey_device_update', '/device/{id}')->put()->action(
+	function($params) {
+		App::main('DeviceController', 'updateDevice',
+			$params, new DIContainer());
+	}
+);
+
+$this->create('ownprey_device_add', '/device/{id}')->delete()->action(
+	function($params) {
+		App::main('DeviceController', 'removeDevice',
 			$params, new DIContainer());
 	}
 );

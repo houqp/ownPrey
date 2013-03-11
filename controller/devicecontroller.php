@@ -26,6 +26,7 @@ use OCA\AppFramework\Controller\Controller;
 use OCA\AppFramework\Db\DoesNotExistException;
 use OCA\AppFramework\Http\TemplateResponse;
 use OCA\AppFramework\Http\TextResponse;
+use OCA\AppFramework\Http\JSONResponse;
 
 use OCA\ownPrey\Db\Device;
 
@@ -67,6 +68,7 @@ class DeviceController extends Controller {
 	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
+	 * @Ajax
 	 */
 	public function check() {
 		$dev = $this->deviceMapper->find($this->params('id'));
@@ -95,6 +97,31 @@ class DeviceController extends Controller {
 	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
+	 * @Ajax
+	 */
+	public function findAll() {
+		$response = new JSONResponse();
+
+		$dev_array = array();
+		foreach ($this->deviceMapper->findAll() as $dev) {
+			array_push($dev_array, array(
+				'id' => $dev->getId(),
+				'name' => $dev->getName(),
+				'missing' => $dev->getMissing(),
+				'delay' => $dev->getDelay(),
+				'module_list' => $dev->getModuleList(),
+			));
+		}
+		$response->setParams($dev_array);
+
+		return $response;
+	}
+
+	/**
+	 * @CSRFExemption
+	 * @IsAdminExemption
+	 * @IsSubAdminExemption
+	 * @Ajax
 	 */
 	public function addDevice() {
 		$dev = new Device();
@@ -111,6 +138,33 @@ class DeviceController extends Controller {
 		} else {
 			return new TextResponse('failed');
 		}
+	}
+
+	/**
+	 * @CSRFExemption
+	 * @IsAdminExemption
+	 * @IsSubAdminExemption
+	 * @Ajax
+	 */
+	public function updateDevice() {
+		$dev = new Device();
+		$dev->setId($this->params('id'));
+		$dev->setName($_POST['name']);
+		$dev->setMissing($_POST['missing']);
+		$dev->setDelay($_POST['delay']);
+		$dev->setModuleList($_POST['module_list']);
+
+		$this->deviceMapper->update($dev);
+	}
+
+	/**
+	 * @CSRFExemption
+	 * @IsAdminExemption
+	 * @IsSubAdminExemption
+	 * @Ajax
+	 */
+	public function removeDevice() {
+		$this->deviceMapper->delete($this->params('id'));
 	}
 }
 

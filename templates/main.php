@@ -43,7 +43,7 @@
 	</table>
 
 	<div id="dev_list">
-		<table>
+		<table id="dev_list_table">
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
@@ -51,19 +51,13 @@
 				<th>Delay</th>
 				<th>Module List</th>
 			</tr>
-			{% for dev in devices %}
-			<tr>
-				<td>
-					<a href="{{ abs_url('ownprey_device_check', {id: dev.id}) }}">
-						{{ dev.id }}
-					</a>
-				</td>
-				<td> {{ dev.name }} </td>
-				<td> {{ dev.missing }} </td>
-				<td> {{ dev.delay }} </td>
-				<td> {{ dev.module_list }} </td>
+			<tr id="tr_tmpl" style="display:none;">
+				<td class="dev_id"></td>
+				<td class="dev_name"></td>
+				<td class="dev_missing"></td>
+				<td class="dev_delay"></td>
+				<td class="dev_module_list"></td>
 			</tr>
-			{% endfor %}
 		</table>
 	</div>
 </div>

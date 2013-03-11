@@ -156,7 +156,7 @@ class DeviceMapper extends Mapper {
 	 * Deletes a device
 	 * @param int $id: the id of th device
 	 */
-	public function delete($id){
+	public function remove($id){
 		$this->deleteQuery($this->tableName, $id);
 	}
 }
