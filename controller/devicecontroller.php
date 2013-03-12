@@ -133,11 +133,19 @@ class DeviceController extends Controller {
 		/* save call will also set device id */
 		$this->deviceMapper->save($dev);
 		/* return new id to web interface */
+		$response = new JSONResponse();
+		$res_array = array(
+			'status' => 'failure',
+			'id' => null,
+		);
+
 		if ($dev->getId()) {
-			return new TextResponse($dev->getId());
-		} else {
-			return new TextResponse('failed');
+			$res_array['status'] = 'success';
+			$res_array['id'] = $dev->getId();
 		}
+
+		$response->setParams($res_array);
+		return $response;
 	}
 
 	/**

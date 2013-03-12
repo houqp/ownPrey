@@ -38,6 +38,9 @@ $this->create('ownprey_index', '/')->action(
 	}
 );
 
+/**
+ * Ajax Routes
+ */
 $this->create('ownprey_device_check', '/check/{id}')->action(
 	function($params) {
 		App::main('DeviceController', 'check',
@@ -45,10 +48,6 @@ $this->create('ownprey_device_check', '/check/{id}')->action(
 	}
 );
 
-
-/**
- * Ajax Routes
- */
 $this->create('ownprey_device_get_all', '/device')->get()->action(
 	function($params) {
 		App::main('DeviceController', 'findAll',
@@ -70,7 +69,7 @@ $this->create('ownprey_device_update', '/device/{id}')->put()->action(
 	}
 );
 
-$this->create('ownprey_device_add', '/device/{id}')->delete()->action(
+$this->create('ownprey_device_remove', '/device/{id}')->delete()->action(
 	function($params) {
 		App::main('DeviceController', 'removeDevice',
 			$params, new DIContainer());
