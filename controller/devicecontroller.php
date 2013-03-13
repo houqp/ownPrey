@@ -137,10 +137,10 @@ class DeviceController extends Controller {
 	 */
 	public function addDevice() {
 		$dev = new Device();
-		$dev->setName(trim($_POST['name']));
-		$dev->setMissing(trim($_POST['missing']));
-		$dev->setDelay(trim($_POST['delay']));
-		$dev->setModuleList(trim($_POST['module_list']));
+		$dev->setName(trim($this->params('name')));
+		$dev->setMissing(trim($this->params('missing')));
+		$dev->setDelay(trim($this->params('delay')));
+		$dev->setModuleList(trim($this->params('module_list')));
 
 		/* save call will also set device id */
 		$this->deviceMapper->save($dev);
@@ -169,10 +169,10 @@ class DeviceController extends Controller {
 	public function updateDevice() {
 		$dev = new Device();
 		$dev->setId($this->params('id'));
-		$dev->setName(trim($_POST['name']));
-		$dev->setMissing(trim($_POST['missing']));
-		$dev->setDelay(trim($_POST['delay']));
-		$dev->setModuleList(trim($_POST['module_list']));
+		$dev->setName(trim($this->params('name')));
+		$dev->setMissing(trim($this->params('missing')));
+		$dev->setDelay(trim($this->params('delay')));
+		$dev->setModuleList(trim($this->params('module_list')));
 
 		$response = new JSONResponse();
 		$res_array = array(
