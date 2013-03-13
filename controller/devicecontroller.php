@@ -28,7 +28,6 @@ use OCA\AppFramework\Db\DoesNotExistException;
 use OCA\AppFramework\Http\Response;
 use OCA\AppFramework\Http\TemplateResponse;
 use OCA\AppFramework\Http\TextResponse;
-use OCA\AppFramework\Http\JSONResponse;
 
 use OCA\ownPrey\Db\Device;
 
@@ -114,9 +113,8 @@ class DeviceController extends Controller {
 	 * @Ajax
 	 */
 	public function findAll() {
-		$response = new JSONResponse();
-
 		$dev_array = array();
+
 		foreach ($this->deviceMapper->findAll() as $dev) {
 			array_push($dev_array, array(
 				'id' => $dev->getId(),
@@ -126,9 +124,8 @@ class DeviceController extends Controller {
 				'module_list' => $dev->getModuleList(),
 			));
 		}
-		$response->setParams($dev_array);
 
-		return $response;
+		return $this->renderJSON($dev_array);
 	}
 
 	/**
@@ -147,7 +144,6 @@ class DeviceController extends Controller {
 		/* save call will also set device id */
 		$this->deviceMapper->save($dev);
 		/* return new id to web interface */
-		$response = new JSONResponse();
 		$res_array = array(
 			'status' => 'failure',
 			'id' => null,
@@ -158,8 +154,7 @@ class DeviceController extends Controller {
 			$res_array['id'] = $dev->getId();
 		}
 
-		$response->setParams($res_array);
-		return $response;
+		return $this->renderJSON($res_array);
 	}
 
 	/**
@@ -176,16 +171,14 @@ class DeviceController extends Controller {
 		$dev->setDelay(trim($this->params('delay')));
 		$dev->setModuleList(trim($this->params('module_list')));
 
-		$response = new JSONResponse();
 		$res_array = array(
 			'status' => 'success',
 		);
-		$response->setParams($res_array);
 
 		//@TODO how can we detect failure here?    (houqp)
 		$this->deviceMapper->update($dev);
 
-		return $response;
+		return $this->renderJSON($res_array);
 	}
 
 	/**
@@ -195,7 +188,7 @@ class DeviceController extends Controller {
 	 * @Ajax
 	 */
 	public function removeDevice() {
-		$response = new JSONResponse();
+		$response = new Response();
 
 		$this->deviceMapper->remove($this->params('id'));
 
