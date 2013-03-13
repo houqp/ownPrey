@@ -41,7 +41,14 @@ $this->create('ownprey_index', '/')->action(
 /**
  * Ajax Routes
  */
-$this->create('ownprey_device_check', '/check/{id}')->action(
+$this->create('ownprey_device_check_deprecated', '/check/{id}')->action(
+	function($params) {
+		App::main('DeviceController', 'check',
+			$params, new DIContainer());
+	}
+);
+
+$this->create('ownprey_device_check', '/devices/{id}.xml')->action(
 	function($params) {
 		App::main('DeviceController', 'check',
 			$params, new DIContainer());
