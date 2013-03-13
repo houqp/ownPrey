@@ -68,29 +68,41 @@ class DeviceController extends Controller {
 	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
+	 * @IsLoggedInExemption
 	 * @Ajax
 	 */
 	public function check() {
 		$dev = $this->deviceMapper->find($this->params('id'));
 
-		$device = new \SimpleXMLElement('<device/>');
+		if ($dev) {
+			$device = new \SimpleXMLElement('<device/>');
 
-		$status = $device->addChild('status');
-		$missing = $status->addChild('missing', $dev->getMissing());
+			$status = $device->addChild('status');
+			$missing = $status->addChild('missing', $dev->getMissing());
 
-		$configuration = $device->addChild('configuration');
-		$configuration->addChild('delay', $dev->getDelay());
+			$configuration = $device->addChild('configuration');
+			$configuration->addChild('delay', $dev->getDelay());
 
-		$modules = $device->addChild('modules');
-		foreach (explode(' ', $dev->getModuleList()) as $mod) {
-			$m = $modules->addChild('module');
-			$m->addAttribute('active', 'true');
-			$m->addAttribute('name', $mod);
-			$m->addAttribute('type', 'report');
-			$m->addChild('enabled', 'true');
+			$modules = $device->addChild('modules');
+			foreach (explode(' ', $dev->getModuleList()) as $mod) {
+				$m = $modules->addChild('module');
+				$m->addAttribute('active', 'true');
+				$m->addAttribute('name', $mod);
+				$m->addAttribute('type', 'report');
+				$m->addChild('enabled', 'true');
+			}
+
+			$response = new TextResponse($device->asXML(), 'xml');
+
+			if ($missing == "true") {
+				$response->addHeader('HTTP/1.1: 404 Not Found');
+			}
+		} else {
+			$response = new TextResponse('');
+			$response->addHeader('HTTP/1.1: 400 Bad Request');
 		}
 
-		return new TextResponse($device->asXML(), 'xml');
+		return $response;
 	}
 
 	/**

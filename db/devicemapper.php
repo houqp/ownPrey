@@ -44,8 +44,8 @@ class DeviceMapper extends Mapper {
 
 	/**
 	 * Finds a device by id
-	 * @throws DoesNotExistException: if the device does not exist
-	 * @return the device
+	 * @param string $id: the id of the device that we want to find
+	 * @return the device, null if device not found
 	 */
 	public function find($id){
 		$sql = 'SELECT * FROM `' . $this->tableName
@@ -54,17 +54,17 @@ class DeviceMapper extends Mapper {
 		if ($row) {
 			return new Device($row);
 		} else {
-			throw new DoesNotExistException(
-				'Device with id ' . $id . ' does not exist!');
+			return null;
 		}
 	}
 
 
 	/**
 	 * Finds a device by name
-	 * @param string $dev_name: the name of the device that we want to find
-	 * @throws DoesNotExistException: if the device does not exist
-	 * @return the array of device with the same name
+	 * @param string $dev_name: the name of the device that we want to
+	 * find
+	 * @return the array of device with the same name, null if device
+	 * not found.
 	 */
 	public function findByDeviceName($dev_name){
 		$sql = 'SELECT * FROM `' . $this->tableName
@@ -79,8 +79,7 @@ class DeviceMapper extends Mapper {
 			}
 			return $devs;
 		} else {
-			throw new DoesNotExistException(
-				'Device with name ' . $dev_name . ' does not exist!');
+			return null;
 		}
 	}
 
@@ -91,8 +90,8 @@ class DeviceMapper extends Mapper {
 	 */
 	public function findAll(){
 		$result = $this->findAllQuery($this->tableName);
-
 		$entityList = array();
+
 		while($row = $result->fetchRow()){
 			$entity = new Device($row);
 			array_push($entityList, $entity);
