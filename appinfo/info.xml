@@ -2,7 +2,7 @@
 <info>
 	<id>ownprey</id>
 	<name>ownPrey</name>
-	<description>prey server app for ownCloud</description>
+	<description>prey control panel app for ownCloud</description>
 	<version>0.1</version>
 	<licence>AGPL</licence>
 	<author>Qingping Hou</author>
