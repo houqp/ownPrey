@@ -24,6 +24,8 @@ namespace OCA\ownPrey\Controller;
 
 use OCA\AppFramework\Controller\Controller;
 use OCA\AppFramework\Db\DoesNotExistException;
+
+use OCA\AppFramework\Http\Response;
 use OCA\AppFramework\Http\TemplateResponse;
 use OCA\AppFramework\Http\TextResponse;
 use OCA\AppFramework\Http\JSONResponse;
@@ -98,7 +100,7 @@ class DeviceController extends Controller {
 				$response->addHeader('HTTP/1.1: 404 Not Found');
 			}
 		} else {
-			$response = new TextResponse('');
+			$response = new Response();
 			$response->addHeader('HTTP/1.1: 400 Bad Request');
 		}
 
