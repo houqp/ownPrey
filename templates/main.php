@@ -9,21 +9,18 @@
 			<td> Name </td>
 			<td>
 				<input name="name" type="text" value="untitled">
-				</br>
 			</td>
 		</tr>
 		<tr>
 			<td> Missing </td>
 			<td>
 				<input name="missing" type="text" value="false">
-				</br>
 			</td>
 		</tr>
 		<tr>
 			<td> Delay </td>
 			<td>
 				<input name="delay" type="text" value="20">
-				</br>
 			</td>
 		</tr>
 		<tr>
@@ -31,7 +28,6 @@
 			<td>
 				<input name="module_list" type="text"
 					 value="geo network session webcam">
-				</br>
 			</td>
 		</tr>
 		</form>
@@ -58,8 +54,25 @@
 				<td class="dev_delay"></td>
 				<td class="dev_module_list"></td>
 			</tr>
+			<tr id="tr_form_tmpl" style="display:none;">
+				<td colspan="4">
+					<form>
+					<input name="id" type="hidden">
+					<input name="name" type="text">
+					<input name="missing" type="text">
+					<input name="delay" type="text">
+					<input name="module_list" type="text">
+					<form>
+				</td>
+				<td>
+					<button class="edit_dev">edit</button>
+					<button class="del_dev">delete</button>
+					<button class="cancel_dev">cancel</button>
+				</td>
+			</tr>
 		</table>
 	</div>
+
 </div>
 
 

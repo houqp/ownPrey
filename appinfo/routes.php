@@ -62,7 +62,7 @@ $this->create('ownprey_device_add', '/device')->post()->action(
 	}
 );
 
-$this->create('ownprey_device_update', '/device/{id}')->put()->action(
+$this->create('ownprey_device_update', '/device/{id}')->post()->action(
 	function($params) {
 		App::main('DeviceController', 'updateDevice',
 			$params, new DIContainer());

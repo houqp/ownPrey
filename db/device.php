@@ -31,13 +31,13 @@ class Device {
 	private $delay;
 	private $module_list;
 
-	public function __construct($fromRow=null){
+	public function __construct($fromRow=null) {
 		if($fromRow){
 			$this->fromRow($fromRow);
 		}
 	}
 
-	public function fromRow($row){
+	public function fromRow($row) {
 		$this->id = $row['id'];
 		$this->name = $row['name'];
 		$this->missing = $row['missing'];
@@ -45,43 +45,43 @@ class Device {
 		$this->module_list = $row['module_list'];
 	}
 
-	public function getId(){
+	public function getId() {
 		return $this->id;
 	}
 
-	public function getName(){
+	public function getName() {
 		return $this->name;
 	}
 
-	public function getMissing(){
+	public function getMissing() {
 		return $this->missing;
 	}
 
-	public function getDelay(){
+	public function getDelay() {
 		return $this->delay;
 	}
 
-	public function getModuleList(){
+	public function getModuleList() {
 		return $this->module_list;
 	}
 
-	public function setId($id){
+	public function setId($id) {
 		$this->id = $id;
 	}
 
-	public function setName($name){
+	public function setName($name) {
 		$this->name = $name;
 	}
 
-	public function setMissing($missing){
+	public function setMissing($missing) {
 		$this->missing = $missing;
 	}
 
-	public function setDelay($delay){
+	public function setDelay($delay) {
 		$this->delay = $delay;
 	}
 
-	public function setModuleList($module_list){
+	public function setModuleList($module_list) {
 		$this->module_list = $module_list;
 	}
 }

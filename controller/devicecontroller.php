@@ -125,10 +125,10 @@ class DeviceController extends Controller {
 	 */
 	public function addDevice() {
 		$dev = new Device();
-		$dev->setName($_POST['name']);
-		$dev->setMissing($_POST['missing']);
-		$dev->setDelay($_POST['delay']);
-		$dev->setModuleList($_POST['module_list']);
+		$dev->setName(trim($_POST['name']));
+		$dev->setMissing(trim($_POST['missing']));
+		$dev->setDelay(trim($_POST['delay']));
+		$dev->setModuleList(trim($_POST['module_list']));
 
 		/* save call will also set device id */
 		$this->deviceMapper->save($dev);
@@ -157,12 +157,21 @@ class DeviceController extends Controller {
 	public function updateDevice() {
 		$dev = new Device();
 		$dev->setId($this->params('id'));
-		$dev->setName($_POST['name']);
-		$dev->setMissing($_POST['missing']);
-		$dev->setDelay($_POST['delay']);
-		$dev->setModuleList($_POST['module_list']);
+		$dev->setName(trim($_POST['name']));
+		$dev->setMissing(trim($_POST['missing']));
+		$dev->setDelay(trim($_POST['delay']));
+		$dev->setModuleList(trim($_POST['module_list']));
 
+		$response = new JSONResponse();
+		$res_array = array(
+			'status' => 'success',
+		);
+		$response->setParams($res_array);
+
+		//@TODO how can we detect failure here?    (houqp)
 		$this->deviceMapper->update($dev);
+
+		return $response;
 	}
 
 	/**
@@ -172,7 +181,11 @@ class DeviceController extends Controller {
 	 * @Ajax
 	 */
 	public function removeDevice() {
-		$this->deviceMapper->delete($this->params('id'));
+		$response = new JSONResponse();
+
+		$this->deviceMapper->remove($this->params('id'));
+
+		return $response;
 	}
 }
 

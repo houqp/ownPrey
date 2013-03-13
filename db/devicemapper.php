@@ -133,12 +133,10 @@ class DeviceMapper extends Mapper {
 	 * @para Device $device: the device to be updated
 	 */
 	public function update($device){
-		$sql = 'UPDATE `'. $this->tableName . '` SET
-				`name` = ?,
-				`missing` = ?,
-				`delay` = ?
-				`module_list` = ?
-				WHERE `id` = ?';
+		$sql = 'UPDATE `'. $this->tableName
+			. '` SET '
+			. '`name` = ?, `missing` = ?, `delay` = ?, `module_list` = ? '
+			. 'WHERE `id` = ?';
 
 		$params = array(
 			$device->getName(),
@@ -148,7 +146,7 @@ class DeviceMapper extends Mapper {
 			$device->getId()
 		);
 
-		$this->execute($sql, $params);
+		return $this->execute($sql, $params);
 	}
 
 
@@ -157,6 +155,6 @@ class DeviceMapper extends Mapper {
 	 * @param int $id: the id of th device
 	 */
 	public function remove($id){
-		$this->deleteQuery($this->tableName, $id);
+		return $this->deleteQuery($this->tableName, $id);
 	}
 }
