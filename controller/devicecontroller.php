@@ -28,6 +28,7 @@ use OCA\AppFramework\Db\DoesNotExistException;
 use OCA\AppFramework\Http\Response;
 use OCA\AppFramework\Http\TemplateResponse;
 use OCA\AppFramework\Http\TextResponse;
+use OCA\AppFramework\Http\NotFoundResponse;
 
 use OCA\ownPrey\Db\Device;
 
@@ -66,13 +67,14 @@ class DeviceController extends Controller {
 	}
 
 	/**
-	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
 	 * @IsLoggedInExemption
+	 * @CSRFExemption
 	 * @Ajax
 	 */
 	public function check() {
+		return new NotFoundResponse();
 		$dev = $this->deviceMapper->find($this->params('id'));
 
 		if ($dev) {
@@ -107,7 +109,6 @@ class DeviceController extends Controller {
 	}
 
 	/**
-	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
 	 * @Ajax
@@ -129,7 +130,6 @@ class DeviceController extends Controller {
 	}
 
 	/**
-	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
 	 * @Ajax
@@ -158,7 +158,6 @@ class DeviceController extends Controller {
 	}
 
 	/**
-	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
 	 * @Ajax
@@ -182,7 +181,6 @@ class DeviceController extends Controller {
 	}
 
 	/**
-	 * @CSRFExemption
 	 * @IsAdminExemption
 	 * @IsSubAdminExemption
 	 * @Ajax
