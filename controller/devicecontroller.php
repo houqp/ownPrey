@@ -74,7 +74,6 @@ class DeviceController extends Controller {
 	 * @Ajax
 	 */
 	public function check() {
-		return new NotFoundResponse();
 		$dev = $this->deviceMapper->find($this->params('id'));
 
 		if ($dev) {
